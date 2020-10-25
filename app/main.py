@@ -16,6 +16,8 @@ async def get_users():
     session = Session(bind=engine)
     return jsonable_encoder(session.query(User).all())
 
+
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("main:app", host="127.0.0.1", port=5000)
