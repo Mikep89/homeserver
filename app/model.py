@@ -17,11 +17,20 @@ class User(Base):
     projects = relationship("Projects")
     task = relationship("Tasks")
 
+class Statuses(Base):
+    __tablename__="status"
+    id = Column(Integer,primary_key=True)
+    name = Column(String(50),nullable=False)
+    description = Column(String,250,nullable=False)
+    projects = relationship('projects')
+    tasks = relationship('tasks')
+
 class Projects(Base):
     __tablename__="projects"
     id = Column(Integer,primary_key=True)
     project_name = Column(String(50),nullable=False)
     project_description = Column(String(300),nullable=True)
+    status = Column(Integer,ForeignKey('status.id'))
     created_by = Column(Integer, ForeignKey('users.id'))
     created_on = Column(DateTime, default=datetime.utcnow)
     due_date = Column(DateTime)
@@ -37,6 +46,6 @@ class Tasks(Base):
     title = Column(String(50),nullable=False)
     description = Column(String,nullable=False)
     estimated_hours_required = Column(Integer,nullable=False)
-
+    status = Column(integer,ForeignKey('status.id'))
     
 
