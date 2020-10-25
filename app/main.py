@@ -8,6 +8,14 @@ app = FastAPI()
 async def read_root():
     return jsonable_encoder({"hello": "world"})
 
-@app.get('/item/{item_id}')
-async def read_item(item_id: int, q: Optional[str] = None):
-    return jsonable_encoder({"item_id": item_id, 'q':q})
+@app.get('/users')
+async def get_users():
+    from app.model import Base,User,engine
+    from sqlalchemy.orm.session import Session
+
+    session = Session(bind=engine)
+    return jsonable_encoder(session.query(User).all())
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("main:app", host="127.0.0.1", port=5000)

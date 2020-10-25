@@ -25,8 +25,8 @@ class Statuses(Base):
     id = Column(Integer,primary_key=True)
     name = Column(String(50),nullable=False)
     description = Column(String(250),nullable=False)
-    projects = relationship('projects')
-    tasks = relationship('tasks')
+    projects = relationship('Projects')
+    tasks = relationship('Tasks')
 
     def __repr__(self):
         return f'<{self.id} - {self.name} >'
