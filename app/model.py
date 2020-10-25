@@ -13,7 +13,11 @@ class User(Base):
     id = Column(Integer,primary_key=True)
     name = Column(String,nullable=False)
     email = Column(String,nullable=False)
+    password = Column(String,nullable=False)
+    apiKey = Column(String,nullable=True)
+    apiExpiry = Column(DateTime,default=datetime.utcnow)
     dateCreated = Column(DateTime,default=datetime.utcnow)
+    
     projects = relationship("Projects")
     task = relationship("Tasks")
 
