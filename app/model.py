@@ -17,6 +17,9 @@ class User(Base):
     projects = relationship("Projects")
     task = relationship("Tasks")
 
+    def __repr__(self):
+        return f'<{self.name} - {self.email} >'
+
 class Statuses(Base):
     __tablename__="status"
     id = Column(Integer,primary_key=True)
@@ -24,6 +27,9 @@ class Statuses(Base):
     description = Column(String,250,nullable=False)
     projects = relationship('projects')
     tasks = relationship('tasks')
+
+    def __repr__(self):
+        return f'<{self.id} - {self.name} >'
 
 class Projects(Base):
     __tablename__="projects"
@@ -37,6 +43,9 @@ class Projects(Base):
     estimated_hours_required = Column(Integer,nullable=True)
     tasks = relationship('Tasks')
 
+    def __repr__(self):
+        return f'{self.id} - {self.project_name} due on: {self.due_date}'
+
 class Tasks(Base):
     __tablename__ = "tasks"
     id = Column(Integer, primary_key=True)
@@ -46,6 +55,9 @@ class Tasks(Base):
     title = Column(String(50),nullable=False)
     description = Column(String,nullable=False)
     estimated_hours_required = Column(Integer,nullable=False)
-    status = Column(integer,ForeignKey('status.id'))
+    status = Column(Integer,ForeignKey('status.id'))
+
+    def __repr__(self):
+        return f'{self.id} - {self.title} {self.description}'
     
 
