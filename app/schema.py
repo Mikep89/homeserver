@@ -8,9 +8,10 @@ class UserBase(BaseModel):
     dateCreated: datetime.datetime
 
 class UserCreate(UserBase):
+    
     password:str
 
-class RenewApiKey(UserBase):
+class RenewApiKey(BaseModel):
     apiKey: str
     apiExpiry: datetime.datetime
 
